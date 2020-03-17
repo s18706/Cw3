@@ -10,6 +10,10 @@
       </e>
       <e p="Cw3.csproj" t="IncludeRecursive" />
       <e p="Cw3.sln" t="IncludeFlat" />
+      <e p="DAL" t="Include">
+        <e p="IDbService.cs" t="Include" />
+        <e p="MockDbService.cs" t="Include" />
+      </e>
       <e p="Models" t="Include">
         <e p="Student.cs" t="Include" />
       </e>

@@ -1,4 +1,5 @@
 using System;
+using Cw3.DAL;
 using Cw3.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,8 @@ namespace Cw3.Controllers
     [Route("api/students")]
     public class StudentsController : ControllerBase
     {
+        private readonly IDbService _dbService;
+        
         // [HttpGet]
         // public string GetStudent()
         // {
@@ -25,11 +28,11 @@ namespace Cw3.Controllers
             return NotFound("Nie znaleziono studenta");
         }
 
-        [HttpGet]
-        public string GetStudent(string orderBy)
-        {
-            return $"Kowalski, Malewski, Andrzejewski sortowanie={orderBy}";
-        }
+        // [HttpGet]
+        // public string GetStudent(string orderBy)
+        // {
+        //     return $"Kowalski, Malewski, Andrzejewski sortowanie={orderBy}";
+        // }
         
         [HttpPost]
         public IActionResult CreateStudent([FromBody]Student student)
@@ -43,11 +46,22 @@ namespace Cw3.Controllers
         {
             return Ok("Aktualizacja dokończona");
         }
-        
+
         [HttpDelete("{id}")]
         public IActionResult DeleteStudent(int id)
         {
             return Ok("Usuwanie ukończone");
+        }
+
+        public StudentsController(IDbService dbService)
+        {
+            _dbService = dbService;
+        }
+        
+        [HttpGet]
+        public IActionResult GetStudent(string orderBy)
+        {
+            return Ok(_dbService.GetStudents());
         }
     }
 }
